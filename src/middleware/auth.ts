@@ -25,8 +25,8 @@ export const jwtParse = (req: Request, res: Response, next: NextFunction): void 
     const { authorization } = req.headers;
 
     if (!authorization || !authorization.startsWith("Bearer ")) {
-      res.sendStatus(401);
-      return;
+      return res.sendStatus(401);
+      
     }
 
     const token = authorization.split(" ")[1];
@@ -38,8 +38,8 @@ export const jwtParse = (req: Request, res: Response, next: NextFunction): void 
       const user = await User.findOne({ auth0Id });
 
       if (!user) {
-        res.sendStatus(401);
-        return;
+      return res.sendStatus(401);
+      
       }
 
       req.auth0Id = auth0Id!;
@@ -52,3 +52,6 @@ export const jwtParse = (req: Request, res: Response, next: NextFunction): void 
     }
   })();
 };
+
+
+
